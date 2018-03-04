@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			height: 640px;
+			position: relative;
+		}
+		.ball{
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			position: absolute;
+			top: 500px;left: 50%;
+			margin-left: -50px;
+			background-color: #34538b;
+			background-image: radial-gradient(100px 100px at 50px 20px, #a0b3d6, #34538b);
+			background-image: -moz-radial-gradient(100px 100px at 50px 20px, #a0b3d6, #34538b);
+			background-image: -ms-radial-gradient(100px 100px at 50px 20px, #a0b3d6, #34538b);
+			background-image: -webkit-radial-gradient(100px 100px at 50px 20px, #a0b3d6, #34538b);
+			background-image: -o-radial-gradient(100px 100px at 50px 20px, #a0b3d6, #34538b);
+			cursor: move;
+			z-index: 1;
+		}
+		.shadow{
+			width: 100px;
+			height: 30px;
+			position: absolute;
+			left: 50%;
+			bottom: 22px;
+			margin-left: -50px;
+			border-radius: 50%;
+			background-image: radial-gradient(closest-side, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+			background-image: -webkit-radial-gradient(closest-side, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="ball">
+			
+		</div>
+		<div class="shadow">
+			
+		</div>
+	</div>
+</body>
+<script>
+	var ball = document.querySelector(".ball");
+	var box = document.querySelector(".box");
+	var startTop = 0;
+	var flag = false;
+
+	ball.onmousedown = function (event) {
+		startTop = event.pageY;
+		flag = true;
+	}
+	box.onmousemove = function(e){
+		if(flag){
+			var tops = 500 - (startTop - e.pageY);
+			if(tops < 0){	
+				tops = 0;
+			}else if(tops > 500){
+				tops = 500;
+			}
+			console.log(tops)
+			ball.style.top = tops+'px';
+		}
+	}
+	box.onmouseup = function(e){
+		ball.style.top = "500px";
+		flag = false;
+	}
+</script>
+</html>
